@@ -5,19 +5,18 @@
 package GUI;
 import Interfaces.warObserver;
 
-public class Tank extends javax.swing.JFrame implements warObserver{
+public class Helicopter extends javax.swing.JFrame implements warObserver{
     boolean isCheckedPosition = false;
 
-    public Tank() {
+    public Helicopter() {
         initComponents();
-        setTitle("Tank");
+        setTitle("Helicopter");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocation(360, 500);
+        setLocation(960, 100);
         setVisible(true);
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
-        jButton4.setEnabled(false);
         
     }
     
@@ -33,25 +32,20 @@ public class Tank extends javax.swing.JFrame implements warObserver{
     @Override
     public void setActivateButtons(int value){
         if (isCheckedPosition) {
-            if (value>20) {
+            if (value>25) {
                 jButton1.setEnabled(true);
             }else{
                 jButton1.setEnabled(false);
             }
-            if (value>40) {
+            if (value>50) {
                 jButton2.setEnabled(true);
             }else{
                 jButton2.setEnabled(false);
             }
-            if (value>60) {
+            if (value>75) {
                 jButton3.setEnabled(true);
             }else{
                 jButton3.setEnabled(false);
-            }
-            if (value>80) {
-                jButton4.setEnabled(true);
-            }else{
-                jButton4.setEnabled(false);
             }
         }
     }  
@@ -69,7 +63,6 @@ public class Tank extends javax.swing.JFrame implements warObserver{
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
@@ -89,9 +82,7 @@ public class Tank extends javax.swing.JFrame implements warObserver{
 
         jButton2.setText("Missile Operation");
 
-        jButton3.setText("Redar operation");
-
-        jButton4.setText("Rorate Shooting");
+        jButton3.setText("Laser operation");
 
         jLabel2.setText("Ammo Count");
 
@@ -142,9 +133,7 @@ public class Tank extends javax.swing.JFrame implements warObserver{
                                     .addComponent(jSpinner2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(153, 153, 153)
                                 .addComponent(jCheckBox1))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -177,8 +166,7 @@ public class Tank extends javax.swing.JFrame implements warObserver{
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jCheckBox1)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
+                            .addComponent(jButton3))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -215,23 +203,21 @@ public class Tank extends javax.swing.JFrame implements warObserver{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Helicopter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Helicopter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Helicopter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Helicopter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tank().setVisible(true);
+                new Helicopter().setVisible(true);
             }
         });
     }
@@ -240,7 +226,6 @@ public class Tank extends javax.swing.JFrame implements warObserver{
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
