@@ -5,16 +5,27 @@
 package GUI;
 
 
-public class TankWindow extends javax.swing.JFrame {
+public class Tank extends javax.swing.JFrame implements vehicleInterface{
 
 
-    public TankWindow() {
+    public Tank() {
         initComponents();
         setTitle("Tank");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-
+    
+    public void update(int level){
+    
+    }
+    
+    public void areaClear(boolean isChecked){
+        if(isChecked){
+            jLabel4.setText("Area Cleared");
+        }else{
+            jLabel4.setText("Area Not Cleared");
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

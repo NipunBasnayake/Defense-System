@@ -4,16 +4,27 @@
  */
 package GUI;
 
-public class SubmarineWindow extends javax.swing.JFrame {
+public class Submarine extends javax.swing.JFrame implements vehicleInterface{
 
-    public SubmarineWindow() {
+    public Submarine() {
         initComponents();
         setTitle("Submarine");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
+    
+    public void update(int level){
+    
+    }
 
-
+    public void areaClear(boolean isChecked){
+        if(isChecked){
+            jLabel4.setText("Area Cleared");
+        }else{
+            jLabel4.setText("Area Not Cleared");
+        }
+    }
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

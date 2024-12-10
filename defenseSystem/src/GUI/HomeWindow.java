@@ -49,10 +49,13 @@ public class HomeWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new GUI.MainController().setVisible(true);
-        new GUI.HelecopterWindow().setVisible(true);
-        new GUI.TankWindow().setVisible(true);
-        new GUI.SubmarineWindow().setVisible(true);
+        Helecopter heli = new Helecopter();
+        Tank tank = new Tank();
+        Submarine sub = new Submarine();
+        Controller controller = new Controller(heli, tank, sub);
+        
+        new MainController(controller).setVisible(true);
+        new Helecopter().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -4,13 +4,25 @@
  */
 package GUI;
 
-public class HelecopterWindow extends javax.swing.JFrame {
 
-    public HelecopterWindow() {
+public class Helecopter extends javax.swing.JFrame implements vehicleInterface{
+    public Helecopter() {
         initComponents();
         setTitle("Helecopter");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+    
+    public void update(int level){
+    
+    }
+    
+    public void areaClear(boolean isChecked){
+        if(isChecked){
+            jLabel4.setText("Area Cleared");
+        }else{
+            jLabel4.setText("Area Not Cleared");
+        }
     }
 
 
@@ -74,6 +86,11 @@ public class HelecopterWindow extends javax.swing.JFrame {
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,6 +175,10 @@ public class HelecopterWindow extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+
+    }//GEN-LAST:event_jSlider1StateChanged
 
     /**
      * @param args the command line arguments
