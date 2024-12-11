@@ -11,4 +11,5 @@ package Interfaces;
 public interface warObservableInterface {
     public void areaClear(boolean isChecked);
     public void activeButtons(int value);
+    public void messageFromMainController(String message);
 }

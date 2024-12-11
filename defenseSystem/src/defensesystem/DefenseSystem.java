@@ -25,9 +25,9 @@ public class DefenseSystem {
         warObservable ob = new warObservable();
         MainController main = new MainController(ob);
         
-        ob.addToWarArray(new Helicopter());
-        ob.addToWarArray(new Tank());
-        ob.addToWarArray(new Submarine());
+        ob.addToWarArray(new Helicopter(main));
+        ob.addToWarArray(new Tank(main));
+        ob.addToWarArray(new Submarine(main));
         
      
     }

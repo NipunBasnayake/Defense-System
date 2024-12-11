@@ -13,9 +13,10 @@ public class MainController extends javax.swing.JFrame {
         setLocation(360, 100);
         setVisible(true);
     }
-
     
-    
+    public void setMessage(String message){
+        jTextArea2.setText(message);  
+    }
     
     
     
@@ -93,6 +94,11 @@ public class MainController extends javax.swing.JFrame {
         });
 
         jButton2.setText("Send");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -184,6 +190,10 @@ public class MainController extends javax.swing.JFrame {
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        warObservable.messageFromMainController("Main Controller : "+jTextArea1.getText());
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

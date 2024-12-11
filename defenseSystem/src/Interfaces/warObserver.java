@@ -11,4 +11,5 @@ package Interfaces;
 public interface warObserver {
     public void setAreaClear(boolean isChecked);
     public void setActivateButtons(int value);
+    public void setMessageFromMainController(String message);
 }

@@ -16,6 +16,7 @@ public class warObservable implements warObservableInterface{
 
     boolean isChecked = false;
     int value;
+    String message;
     
     private void extendWarArray(){
         warObserver[] tempArray = new warObserver[warArray.length+1];
@@ -54,6 +55,20 @@ public class warObservable implements warObservableInterface{
     public void activatingButtons(){
         for (warObserver observer : warArray) {
             observer.setActivateButtons(value);
+        }
+    }
+    
+    @Override
+    public void messageFromMainController(String message){
+        if (message!=null) {
+            this.message = message;
+        }
+        messageSending();
+    }
+    
+    public void messageSending(){
+        for (warObserver observer : warArray) {
+            observer.setMessageFromMainController(message);
         }
     }
 }
