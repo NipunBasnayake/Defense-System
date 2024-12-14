@@ -5,6 +5,9 @@
 package GUI;
 
 import Controller.warObservable;
+import jaco.mp3.player.MP3Player;
+import java.io.File;
+import javax.swing.Timer;
 
 /**
  *
@@ -20,6 +23,22 @@ public class Home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Defence System");
+        
+        MP3Player player = new MP3Player(new File("C:\\Users\\nipun\\Downloads\\DefenseSystem\\DefenseSystem.MP3"));
+        player.play();
+        
+        Timer timer = new Timer(14000, e -> {
+            this.dispose(); // Dispose of the current frame
+          
+            warObservable ob = new warObservable();
+            MainController main = new MainController(ob);
+            ob.addToWarArray(new Helicopter(main));
+            ob.addToWarArray(new Tank(main));
+            ob.addToWarArray(new Submarine(main)); 
+
+        });
+        timer.setRepeats(false); // Ensure the timer runs only once
+        timer.start(); // Start the timer
     }
 
     /**
@@ -31,41 +50,41 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
 
-        jButton1.setText("Skip");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\04 OOP\\Courseworks\\Final Coursework\\DefenseSystem\\Accets\\Images\\startButton.png")); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(602, 596, 110, 22);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(550, 580, 160, 60);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\nipun\\Videos\\VideoProc Converter AI\\DefenseSystem_2.gif")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\04 OOP\\Courseworks\\Final Coursework\\DefenseSystem\\Accets\\Videos\\DefenseSystem_9.gif")); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1280, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         warObservable ob = new warObservable();
         MainController main = new MainController(ob);
-        
+
         ob.addToWarArray(new Helicopter(main));
         ob.addToWarArray(new Tank(main));
         ob.addToWarArray(new Submarine(main));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLabel2MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

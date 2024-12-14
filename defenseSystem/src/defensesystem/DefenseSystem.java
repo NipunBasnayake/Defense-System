@@ -6,6 +6,7 @@ package defensesystem;
 
 import Controller.warObservable;
 import GUI.Helicopter;
+import GUI.Home;
 import GUI.MainController;
 import GUI.Submarine;
 import GUI.Tank;
@@ -22,14 +23,7 @@ public class DefenseSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        warObservable ob = new warObservable();
-        MainController main = new MainController(ob);
-        
-        ob.addToWarArray(new Helicopter(main));
-        ob.addToWarArray(new Tank(main));
-        ob.addToWarArray(new Submarine(main));
-        
-     
+        new Home().setVisible(true);
     }
     
 }
