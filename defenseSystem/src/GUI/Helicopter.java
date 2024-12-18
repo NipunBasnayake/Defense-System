@@ -17,6 +17,7 @@ public class Helicopter extends javax.swing.JFrame implements warObserver {
         setLocation(985, 50);
         setVisible(true);
         setLayout(null);
+        system.out.println("Helicopter Constructor");
 
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
