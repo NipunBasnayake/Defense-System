@@ -14,31 +14,51 @@ import javax.swing.Timer;
  * @author nipun
  */
 public class Home extends javax.swing.JFrame {
+    
+    private Timer timer;
+    private MP3Player player;
 
-    /**
-     * Creates new form Home
-     */
     public Home() {
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Defence System");
-        
-        MP3Player player = new MP3Player(new File("C:\\Users\\nipun\\Downloads\\DefenseSystem\\DefenseSystem.MP3"));
-        player.play();
-        
-        Timer timer = new Timer(14000, e -> {
-            this.dispose(); // Dispose of the current frame
-          
-            warObservable ob = new warObservable();
-            MainController main = new MainController(ob);
-            ob.addToWarArray(new Helicopter(main));
-            ob.addToWarArray(new Tank(main));
-            ob.addToWarArray(new Submarine(main)); 
 
+        setupPlayer();
+        setupTimer();
+    }
+
+    private void setupPlayer() {
+        player = new MP3Player(new File("E:\\04 OOP\\Courseworks\\Final Coursework\\DefenseSystem\\Accets\\MP3\\DefenseSystem.MP3"));
+        player.play();
+    }
+
+    private void setupTimer() {
+        timer = new Timer(14000, e -> {
+            runGame();
         });
-        timer.setRepeats(false); // Ensure the timer runs only once
-        timer.start(); // Start the timer
+        timer.setRepeats(false);
+        timer.start();
+    }
+    
+    private void runGame() {
+        if (timer != null) {
+            timer.stop();
+        }
+        if (player != null) {
+            player.stop();
+        }
+        setupGameComponents();
+        this.dispose();
+    }
+
+    private void setupGameComponents() {
+        warObservable ob = new warObservable();
+        MainController main = MainController.getInstance();
+
+        ob.addToWarArray(new Helicopter());
+        ob.addToWarArray(new Tank());
+        ob.addToWarArray(new Submarine());
     }
 
     /**
@@ -74,12 +94,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        warObservable ob = new warObservable();
-        MainController main = new MainController(ob);
-
-        ob.addToWarArray(new Helicopter(main));
-        ob.addToWarArray(new Tank(main));
-        ob.addToWarArray(new Submarine(main));
+        runGame();
     }//GEN-LAST:event_jLabel2MousePressed
 
 

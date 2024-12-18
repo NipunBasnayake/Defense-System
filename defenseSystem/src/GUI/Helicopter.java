@@ -5,56 +5,38 @@
 package GUI;
 import Interfaces.warObserver;
 
-public class Helicopter extends javax.swing.JFrame implements warObserver{
-    boolean isCheckedPosition = false;
-    private MainController main;
+public class Helicopter extends javax.swing.JFrame implements warObserver {
+    private final MainController main;
 
-    public Helicopter(MainController main) {
+    public Helicopter() {
         initComponents();
-        this.main=main;
+        main = MainController.getInstance();
+
         setTitle("Helicopter");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocation(985, 50);
         setVisible(true);
         setLayout(null);
+
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
-        
     }
-    
+
     @Override
-    public void setAreaClear(boolean isChecked){
-        if (isChecked) {
-            jLabel1.setText("Area Cleared");
-        }else{
-            jLabel1.setText("Area Not Cleared");
-        }
+    public void setAreaClear(boolean isChecked) {
+        jLabel1.setText(isChecked ? "Area Cleared" : "Area Not Cleared");
     }
-    
+
     @Override
-    public void setActivateButtons(int value){
-        if (isCheckedPosition) {
-            if (value>25) {
-                jButton1.setEnabled(true);
-            }else{
-                jButton1.setEnabled(false);
-            }
-            if (value>50) {
-                jButton2.setEnabled(true);
-            }else{
-                jButton2.setEnabled(false);
-            }
-            if (value>75) {
-                jButton3.setEnabled(true);
-            }else{
-                jButton3.setEnabled(false);
-            }
-        }
-    }  
-    
+    public void setActivateButtons(int value) {
+        jButton1.setEnabled(value > 25);
+        jButton2.setEnabled(value > 50);
+        jButton3.setEnabled(value > 75);
+    }
+
     @Override
-    public void setMessageFromMainController(String message){
+    public void setMessageFromMainController(String message) {
         jTextArea1.setText(message);
     }
     
@@ -207,7 +189,7 @@ public class Helicopter extends javax.swing.JFrame implements warObserver{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        isCheckedPosition = jCheckBox1.isSelected();
+        boolean isCheckedPosition = jCheckBox1.isSelected();
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

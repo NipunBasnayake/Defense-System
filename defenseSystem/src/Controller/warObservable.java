@@ -71,4 +71,9 @@ public class warObservable implements warObservableInterface{
             observer.setMessageFromMainController(message);
         }
     }
+
+    @Override
+    public warObservableInterface getInstance() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
