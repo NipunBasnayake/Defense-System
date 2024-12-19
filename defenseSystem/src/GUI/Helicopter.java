@@ -19,6 +19,7 @@ public class Helicopter extends javax.swing.JFrame implements Observer{
         setLocation(973, 150);
         setVisible(true);
         setLayout(null);
+
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
