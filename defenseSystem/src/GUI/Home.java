@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import Controller.warObservable;
+import Controller.Observable;
 import jaco.mp3.player.MP3Player;
 import java.io.File;
 import javax.swing.Timer;
@@ -17,48 +17,34 @@ public class Home extends javax.swing.JFrame {
     
     private Timer timer;
     private MP3Player player;
+    private boolean isDisposed = false;
 
-    public Home() {
+public Home() {
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Defence System");
 
-        setupPlayer();
-        setupTimer();
-    }
-
-    private void setupPlayer() {
-        player = new MP3Player(new File("E:\\04 OOP\\Courseworks\\Final Coursework\\DefenseSystem\\Accets\\MP3\\DefenseSystem.MP3"));
+        player = new MP3Player(new File("C:\\Users\\nipun\\Downloads\\DefenseSystem\\DefenseSystem.MP3"));
         player.play();
-    }
 
-    private void setupTimer() {
         timer = new Timer(14000, e -> {
-            runGame();
+            if (!isDisposed) {
+                if (player != null) {
+                    player.stop();
+                }
+                this.dispose();
+                isDisposed = true;
+                
+                Observable ob = new Observable();
+                MainController main = new MainController(ob);
+                ob.addToWarArray(new Helicopter(main));
+                ob.addToWarArray(new Tank(main));
+                ob.addToWarArray(new Submarine(main));
+            }
         });
         timer.setRepeats(false);
         timer.start();
-    }
-    
-    private void runGame() {
-        if (timer != null) {
-            timer.stop();
-        }
-        if (player != null) {
-            player.stop();
-        }
-        setupGameComponents();
-        this.dispose();
-    }
-
-    private void setupGameComponents() {
-        warObservable ob = new warObservable();
-        MainController main = MainController.getInstance();
-
-        ob.addToWarArray(new Helicopter());
-        ob.addToWarArray(new Tank());
-        ob.addToWarArray(new Submarine());
     }
 
     /**
@@ -94,7 +80,21 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        runGame();
+         if (player != null) {
+            player.stop();
+        }
+
+        if (!isDisposed) {
+            Observable ob = new Observable();
+            MainController main = new MainController(ob);
+
+            ob.addToWarArray(new Helicopter(main));
+            ob.addToWarArray(new Tank(main));
+            ob.addToWarArray(new Submarine(main));
+
+            this.dispose();
+            isDisposed = true; 
+        }
     }//GEN-LAST:event_jLabel2MousePressed
 
 

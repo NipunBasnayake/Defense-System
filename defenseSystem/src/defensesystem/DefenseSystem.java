@@ -4,14 +4,14 @@
  */
 package defensesystem;
 
-import Controller.warObservable;
+import Controller.Observable;
 import GUI.Helicopter;
 import GUI.Home;
 import GUI.MainController;
 import GUI.Submarine;
 import GUI.Tank;
-import Interfaces.warObservableInterface;
-import Interfaces.warObserver;
+import Interfaces.Observer;
+import Interfaces.ObservableInterface;
 
 /**
  *

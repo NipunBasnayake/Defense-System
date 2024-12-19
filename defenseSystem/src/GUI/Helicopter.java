@@ -3,43 +3,81 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
-import Interfaces.warObserver;
+import Interfaces.Observer;
+import java.awt.Color;
 
-public class Helicopter extends javax.swing.JFrame implements warObserver {
-    private final MainController main;
+public class Helicopter extends javax.swing.JFrame implements Observer{
+    boolean isCheckedPosition = false;
+    private MainController main;
+    String[] msgArray = new String[0];
 
-    public Helicopter() {
+    public Helicopter(MainController main) {
         initComponents();
-        main = MainController.getInstance();
-
+        this.main=main;
         setTitle("Helicopter");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocation(985, 50);
+        setLocation(973, 150);
         setVisible(true);
         setLayout(null);
-
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
-    }
-
-    @Override
-    public void setAreaClear(boolean isChecked) {
-        jLabel1.setText(isChecked ? "Area Cleared" : "Area Not Cleared");
-    }
-
-    @Override
-    public void setActivateButtons(int value) {
-        jButton1.setEnabled(value > 25);
-        jButton2.setEnabled(value > 50);
-        jButton3.setEnabled(value > 75);
-    }
-
-    @Override
-    public void setMessageFromMainController(String message) {
-        jTextArea1.setText(message);
+        
     }
     
+    @Override
+    public void setAreaClear(boolean isChecked){
+        if (isChecked) {
+            jLabel1.setText("Area Cleared");
+            jLabel1.setForeground(Color.GREEN);
+        }else{
+            jLabel1.setText("Area Not Cleared");
+            jLabel1.setForeground(Color.WHITE);
+        }
+    }
+    
+    @Override
+    public void setActivateButtons(int value){
+        if (isCheckedPosition) {
+            if (value>25) {
+                jButton1.setEnabled(true);
+            }else{
+                jButton1.setEnabled(false);
+            }
+            if (value>50) {
+                jButton2.setEnabled(true);
+            }else{
+                jButton2.setEnabled(false);
+            }
+            if (value>75) {
+                jButton3.setEnabled(true);
+            }else{
+                jButton3.setEnabled(false);
+            }
+        }
+    }  
+    
+    @Override
+    public void setMessageFromMainController(String message){
+        extendMsgArray();
+        msgArray[msgArray.length - 1] = message; 
+        showMessages();
+    }
+
+    public void extendMsgArray() {
+        String[] tempArray = new String[msgArray.length + 1];
+        for (int i = 0; i < msgArray.length; i++) {
+            tempArray[i] = msgArray[i];
+        }
+        msgArray = tempArray;
+    }
+
+    public void showMessages() {
+        jTextArea1.setText("");
+        for (String string : msgArray) {
+            jTextArea1.append(string + "\n");
+        }
+    }
     
 
     /**
@@ -66,130 +104,108 @@ public class Helicopter extends javax.swing.JFrame implements warObserver {
         jTextField1 = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(600, 378));
+        setMinimumSize(new java.awt.Dimension(600, 378));
+        setPreferredSize(new java.awt.Dimension(600, 378));
+        getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Area Not Cleared");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 70, 140, 20);
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Shoot");
+        getContentPane().add(jButton1);
+        jButton1.setBounds(20, 100, 140, 30);
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setText("Missile Operation");
+        getContentPane().add(jButton2);
+        jButton2.setBounds(170, 100, 140, 30);
 
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setText("Laser operation");
+        getContentPane().add(jButton3);
+        jButton3.setBounds(20, 140, 140, 30);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ammo Count");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(360, 110, 80, 16);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Soldier Count");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(360, 70, 80, 16);
+        getContentPane().add(jSpinner1);
+        jSpinner1.setBounds(440, 70, 50, 22);
+        getContentPane().add(jSpinner2);
+        jSpinner2.setBounds(440, 110, 50, 22);
 
+        jSlider1.setBackground(new java.awt.Color(0, 0, 0));
+        jSlider1.setForeground(new java.awt.Color(255, 255, 255));
         jSlider1.setMajorTickSpacing(20);
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
         jSlider1.setValue(100);
+        getContentPane().add(jSlider1);
+        jSlider1.setBounds(500, 70, 80, 250);
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 190, 470, 80);
+
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setText("Send");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(400, 280, 90, 30);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(20, 280, 369, 30);
 
+        jCheckBox1.setBackground(new java.awt.Color(0, 0, 0));
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("Position");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jCheckBox1);
+        jCheckBox1.setBounds(420, 150, 70, 20);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 32)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Helicopter");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(210, 10, 170, 44);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                                    .addComponent(jSpinner2)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(153, 153, 153)
-                                .addComponent(jCheckBox1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(321, 321, 321))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jLabel2))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jButton3))
-                        .addGap(44, 44, 44)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(16, 16, 16))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon("E:\\04 OOP\\Courseworks\\Final Coursework\\DefenseSystem\\Accets\\Videos\\vecteezy_hud-animation-motion-templet-sci-fi_48672900-ezgif.com-video-to-gif-converter.gif")); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 600, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        boolean isCheckedPosition = jCheckBox1.isSelected();
+        isCheckedPosition = jCheckBox1.isSelected();
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -207,6 +223,7 @@ public class Helicopter extends javax.swing.JFrame implements warObserver {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
